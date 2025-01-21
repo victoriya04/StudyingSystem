@@ -13,13 +13,31 @@ class Course extends Model
         'name',
         'date',
         'duration',
-        'teacher_name',
         'teacher_id',
         'organization_id',
-        'organization_name',
         'location_id',
-        'location_name'
     ];
+
+    protected $appends = [
+        'teacher_name',
+        'organization_name',
+        'location_name',
+    ];
+
+    public function getTeacherName()
+    {
+        return $this->teacher ? $this->teacher->name : null;
+    }
+
+    public function getLocationName()
+    {
+        return $this->location ? $this->location->name : null;
+    }
+
+    public function getOrganizationName()
+    {
+        return $this->organization ? $this->organization->name : null;
+    }
 
     // Връзка с преподавателя
     public function teacher()
