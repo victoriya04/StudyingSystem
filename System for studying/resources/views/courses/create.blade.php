@@ -1,13 +1,9 @@
-<!DOCTYPE html>
+@extends('layouts.app')
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Course</title>
-</head>
-<body>
-    <h1>Create New Course</h1>
+@section('title', 'Create Course')
+
+@section('content')
+<h1>Create New Course</h1>
     <form action="{{ route('courses.store') }}" method="POST">
         @csrf
         <label for="name">Course Name:</label>
@@ -24,5 +20,4 @@
         <input type="text" name="location_name" id="location_name" required>
         <button type="submit">Create Course</button>
     </form>
-</body>
-</html>
+@endsection

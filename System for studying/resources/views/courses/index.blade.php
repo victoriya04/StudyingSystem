@@ -1,13 +1,9 @@
-<!DOCTYPE html>
+@extends('layouts.app')
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses</title>
-</head>
-<body>
-    <h1>Courses List</h1>
+@section('title', 'Courses')
+
+@section('content')
+<h1>Courses List</h1>
     <a href="{{ route('courses.create') }}">Create New Course</a>
     <ul>
         @foreach ($courses as $course)
@@ -22,5 +18,4 @@
             </li>
         @endforeach
     </ul>
-</body>
-</html>
+@endsection

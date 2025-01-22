@@ -1,13 +1,9 @@
-<!DOCTYPE html>
+@extends('layouts.app')
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Course</title>
-</head>
-<body>
-    <h1>Edit Course</h1>
+@section('title', 'Courses Edit')
+
+@section('content')
+<h1>Edit Course</h1>
     <form action="{{ route('courses.update', $course->id) }}" method="POST">
         @csrf
         @method('PUT')
@@ -25,5 +21,4 @@
         <input type="number" name="location_id" id="location_id" value="{{ $course->location_id }}" required>
         <button type="submit">Update Course</button>
     </form>
-</body>
-</html>
+@endsection
