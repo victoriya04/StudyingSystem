@@ -14,6 +14,7 @@
             <!-- Add your header links here -->
             <ul>
                 <li><a href="{{ url('/') }}">Home</a></li>
+                <li><a href="{{ url('/courses') }}">Courses</a></li>
             </ul>
         
 

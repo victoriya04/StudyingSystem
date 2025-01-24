@@ -10,16 +10,13 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    // Show the registration form
     public function showRegisterForm()
     {
         return view('authentication.register');
     }
 
-    // Handle the registration logic
     public function register(Request $request)
     {
-        // Validate the registration form data
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -30,53 +27,44 @@ class AuthController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Create the user
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        // Log the user in
         Auth::login($user);
 
-        return redirect()->route('welcome'); // Redirect to the dashboard or desired page
+        return redirect()->intended('/');
     }
 
-    // Show the login form
     public function showLoginForm()
     {
         return view('authentication.login');
     }
 
-    // Handle the login logic
     public function login(Request $request)
     {
-        // Validate the login form data
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        // Attempt to log the user in
         if (Auth::attempt($credentials)) {
-            // Redirect to the intended page or dashboard
-            return redirect()->intended('dashboard');
+            return redirect()->intended('/');
         }
 
-        // If login fails, redirect back with error
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
     }
 
-    // Handle the logout logic
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login'); // Redirect to the login page
+        return redirect()->intended('/');
     }
 }
