@@ -5,43 +5,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Laravel App')</title>
-    <!-- Add your stylesheets here -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
     <!-- Header Section -->
     <header>
-        <nav>
+        <nav class="nav">
             <!-- Add your header links here -->
             <ul>
-                <li><a href="{{ url('/') }}">Home</a></li>
-                <li><a href="{{ url('/courses') }}">Courses</a></li>
+                <li><a href="{{ url('/') }}" class="nav-btn">Home</a></li>
+                <li><a href="{{ url('/courses') }}" class="nav-btn">Courses</a></li>
             </ul>
         
 
-            <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+            <ul>
                 @if (Route::has('login'))
-                    <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                        @auth
-                            <a href="{{ route('admin.dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Admin</a>
-                            @if (Route::has('logout'))
+                    @auth
+                        @if (auth()->user()->isAdmin())
+                            <li><a href="{{ route('admin.dashboard') }}" class="nav-btn">Admin</a></li>
+                        @endif
+                        @if (Route::has('logout'))
+                            <li>
                                 <form action="{{ route('logout') }}" method="POST" style="display:inline;">
                                     @csrf
-                                    <button type="submit" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">
+                                    <button type="submit" class="nav-btn">
                                         Logout
                                     </button>
                                 </form>
-                            @endif
-                        @else
-                            <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+                            </li>   
+                        @endif
+                    @else
+                        <li><a href="{{ route('login') }}" class="nav-btn">Log in</a></li>
 
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                            @endif
-                        @endauth
-                    </div>
+                        @if (Route::has('register'))
+                            <li><a href="{{ route('register') }}" class="nav-btn">Register</a></li>
+                        @endif
+                    @endauth
                 @endif
-                
-            </div>
+            </ul>
         </nav>
     </header>
 
