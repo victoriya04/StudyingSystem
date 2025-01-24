@@ -50,3 +50,21 @@ a.nav-btn:hover {
     cursor: pointer;
     color:darkblue;
 }
+
+/* Main */
+
+main {
+    height: 80%;
+}
+
+/* Footer */
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    background-color: aliceblue;
+    border-top: 1px solid #000;
+}
