@@ -12,7 +12,7 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    // Manage Courses
+    // Manage Courses ---------------------------------------------------------------------------------------------
     public function manageCourses()
     {
         $courses = Course::all();
@@ -57,12 +57,20 @@ class AdminController extends Controller
         return redirect()->route('admin.courses.index');
     }
 
+    // Manage Teachers ---------------------------------------------------------------------------------------------
+
     // Similar methods for managing Teachers, Locations, Organizations, and Users
     public function manageTeachers()
     {
         $teachers = Teacher::all();
         return view('admin.teachers.index', compact('teachers'));
     }
+
+    // Manage Locations ---------------------------------------------------------------------------------------------
+
+    // Manage Organizations -----------------------------------------------------------------------------------------
+
+    // Manage Users -------------------------------------------------------------------------------------------------
 
     public function manageUsers()
     {
