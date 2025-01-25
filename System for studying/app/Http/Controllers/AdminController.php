@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\Location;
+use App\Models\Organization;
+use App\Models\Teacher;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -28,7 +32,6 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            // Add validation rules for other fields
         ]);
 
         Course::create($request->all());
@@ -44,7 +47,6 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            // Add validation rules for other fields
         ]);
 
         $course->update($request->all());
@@ -59,16 +61,136 @@ class AdminController extends Controller
 
     // Manage Teachers ---------------------------------------------------------------------------------------------
 
-    // Similar methods for managing Teachers, Locations, Organizations, and Users
     public function manageTeachers()
     {
         $teachers = Teacher::all();
         return view('admin.teachers.index', compact('teachers'));
     }
 
+    public function createTeacher()
+    {
+        return view('admin.teachers.create');
+    }
+
+    public function storeTeacher(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        Teacher::create($request->all());
+        return redirect()->route('admin.teachers.index');
+    }
+
+    public function editTeacher(Teacher $teacher)
+    {
+        return view('admin.teachers.edit', compact('teacher'));
+    }
+
+    public function updateTeacher(Request $request, Teacher $teacher)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $teacher->update($request->all());
+        return redirect()->intended('admin.teachers.index');
+    }
+
+    public function deleteTeacher(Teacher $teacher)
+    {
+        $teacher->delete();
+        return redirect()->route('admin.teachers.index');
+    }
+
     // Manage Locations ---------------------------------------------------------------------------------------------
 
+    public function manageLocations()
+    {
+        $locations = Location::all();
+        return view('admin.locations.index', compact('locations'));
+    }
+
+    public function createLocation()
+    {
+        return view('admin.locations.create');
+    }
+
+    public function storeLocation(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        Location::create($request->all());
+        return redirect()->route('admin.locations.index');
+    }
+
+    public function editLocation(Location $location)
+    {
+        return view('admin.locations.edit', compact('location'));
+    }
+
+    public function updateLocation(Request $request, Location $location)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $location->update($request->all());
+        return redirect()->route('admin.locations.index');
+    }
+
+    public function deleteLocation(Location $location)
+    {
+        $location->delete();
+        return redirect()->route('admin.locations.index');
+    }
+
+
     // Manage Organizations -----------------------------------------------------------------------------------------
+
+    public function manageOrganizations()
+    {
+        $organizations = Organization::all();
+        return view('admin.organizations.index', compact('organizations'));
+    }
+
+    public function createOrganization()
+    {
+        return view('admin.organizations.create');
+    }
+
+    public function storeOrganization(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        Organization::create($request->all());
+        return redirect()->route('admin.organizations.index');
+    }
+
+    public function editOrganization(Organization $organization)
+    {
+        return view('admin.organizations.edit', compact('organization'));
+    }
+
+    public function updateOrganization(Request $request, Organization $organization)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $organization->update($request->all());
+        return redirect()->route('admin.organizations.index');
+    }
+
+    public function deleteOrganization(Organization $organization)
+    {
+        $organization->delete();
+        return redirect()->route('admin.organizations.index');
+    }
 
     // Manage Users -------------------------------------------------------------------------------------------------
 
@@ -78,8 +200,39 @@ class AdminController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
-    public function createAdminUser()
+    public function createUser()
     {
         return view('admin.users.create');
+    }
+
+    public function storeUser(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        User::create($request->all());
+        return redirect()->route('admin.users.index');
+    }
+
+    public function editUser(User $user)
+    {
+        return view('admin.users.edit', compact('user'));
+    }
+
+    public function updateUser(Request $request, User $user)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $user->update($request->all());
+        return redirect()->route('admin.users.index');
+    }
+
+    public function deleteUser(User $user)
+    {
+        $user->delete();
+        return redirect()->route('admin.users.index');
     }
 }

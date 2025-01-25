@@ -48,14 +48,33 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function() {
 
     // Manage Teachers
     Route::get('teachers', [AdminController::class, 'manageTeachers'])->name('admin.teachers.index');
+    Route::get('teachers/create', [AdminController::class, 'createTeacher'])->name('admin.teachers.create');
+    Route::post('teachers', [AdminController::class, 'storeTeacher'])->name('admin.teachers.store');
+    Route::get('teachers/{teacher}/edit', [AdminController::class, 'editTeacher'])->name('admin.teachers.edit');
+    Route::put('teachers/{teacher}', [AdminController::class, 'updateTeacher'])->name('admin.teachers.update');
+    Route::delete('teachers/{teacher}', [AdminController::class, 'deleteTeacher'])->name('admin.teachers.delete');
 
     // Manage Locations
     Route::get('locations', [AdminController::class, 'manageLocations'])->name('admin.locations.index');
+    Route::get('locations/create', [AdminController::class, 'createLocation'])->name('admin.locations.create');
+    Route::post('locations', [AdminController::class, 'storeLocation'])->name('admin.locations.store');
+    Route::get('locations/{location}/edit', [AdminController::class, 'editLocation'])->name('admin.locations.edit');
+    Route::put('locations/{location}', [AdminController::class, 'updateLocation'])->name('admin.locations.update');
+    Route::delete('locations/{location}', [AdminController::class, 'deleteLocation'])->name('admin.locations.delete');
 
     // Manage Organizations
     Route::get('organizations', [AdminController::class, 'manageOrganizations'])->name('admin.organizations.index');
+    Route::get('organizations/create', [AdminController::class, 'createOrganization'])->name('admin.organizations.create');
+    Route::post('organizations', [AdminController::class, 'storeOrganization'])->name('admin.organizations.store');
+    Route::get('organizations/{organization}/edit', [AdminController::class, 'editOrganization'])->name('admin.organizations.edit');
+    Route::put('organizations/{organization}', [AdminController::class, 'updateOrganization'])->name('admin.organizations.update');
+    Route::delete('organizations/{organization}', [AdminController::class, 'deleteOrganization'])->name('admin.organizations.delete');
 
     // Manage Users
     Route::get('users', [AdminController::class, 'manageUsers'])->name('admin.users.index');
-    Route::get('users/create', [AdminController::class, 'createAdminUser'])->name('admin.users.create');
+    Route::get('users/create', [AdminController::class, 'createUser'])->name('admin.users.create');
+    Route::post('users', [AdminController::class, 'storeUser'])->name('admin.users.store');
+    Route::get('users/{user}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');
+    Route::put('users/{user}', [AdminController::class, 'updateUser'])->name('admin.users.update');
+    Route::delete('users/{user}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
 });
